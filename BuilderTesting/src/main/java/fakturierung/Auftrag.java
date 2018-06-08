@@ -1,6 +1,7 @@
 package fakturierung;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class Auftrag {
 	private String nummer;
@@ -17,16 +18,28 @@ public class Auftrag {
 	private boolean datumGeanwtortet;
 	private boolean erledigt;
 
-	public Auftrag(String nummer, String titel, String name, LocalDate datum, String artikel, String arbeitNehmer,
+	public Auftrag(String nummer, String titel, String name, String datum, String artikel, String arbeitNehmer,
 			String beschreibung) {
-		super();
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
 		this.nummer = nummer;
 		this.titel = titel;
 		this.name = name;
-		this.datum = datum;
+		this.datum = LocalDate.parse(datum, formatter);
 		this.artikel = artikel;
 		this.arbeitNehmer = arbeitNehmer;
 		this.beschreibung = beschreibung;
+	}
+
+	public Auftrag(String[] auftragArray) {
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+
+		this.nummer = auftragArray[0];
+		this.titel = auftragArray[1];
+		this.name = auftragArray[2];
+		this.datum = LocalDate.parse(auftragArray[3], formatter);
+		this.artikel = auftragArray[4];
+		this.arbeitNehmer = auftragArray[5];
+		this.beschreibung = auftragArray[6];
 	}
 
 	public String getNummer() {
