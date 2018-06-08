@@ -7,20 +7,19 @@ import javafx.scene.control.ListView;
 
 public class Controller {
 
-	ObservableList<String> listenTest = FXCollections.observableArrayList();
-	
+	public Controller() {
+	}
+
+	public ObservableList<String> content = FXCollections.observableArrayList();
+
 	@FXML
-	private ListView<String> listView;
+	public ListView<String> listView;
 
 	@FXML
 	public void newButtonClicked() {
-		addEintrag("test");
+		System.out.println();
 	}
-
-	@FXML
-	public void addEintrag(String titel) {
-		listenTest.add(titel);
-		listView.setItems(listenTest);
-	}
+	
+	
 
 }

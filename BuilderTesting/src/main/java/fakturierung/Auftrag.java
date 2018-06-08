@@ -1,15 +1,12 @@
 package fakturierung;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-
 public class Auftrag {
 	private String nummer;
 	private String titel;
 
 	// Beschreibung
 	private String name;
-	private LocalDate datum;
+	private String datum;
 	private String artikel;
 	private String arbeitNehmer;
 	private String beschreibung;
@@ -20,26 +17,33 @@ public class Auftrag {
 
 	public Auftrag(String nummer, String titel, String name, String datum, String artikel, String arbeitNehmer,
 			String beschreibung) {
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+		// DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 		this.nummer = nummer;
 		this.titel = titel;
 		this.name = name;
-		this.datum = LocalDate.parse(datum, formatter);
+		this.datum = datum;
 		this.artikel = artikel;
 		this.arbeitNehmer = arbeitNehmer;
 		this.beschreibung = beschreibung;
 	}
 
 	public Auftrag(String[] auftragArray) {
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+		// DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 
 		this.nummer = auftragArray[0];
 		this.titel = auftragArray[1];
 		this.name = auftragArray[2];
-		this.datum = LocalDate.parse(auftragArray[3], formatter);
+		this.datum = auftragArray[3];
 		this.artikel = auftragArray[4];
 		this.arbeitNehmer = auftragArray[5];
 		this.beschreibung = auftragArray[6];
+	}
+
+	public String toCSV() {
+		StringBuilder auftragsCSV = new StringBuilder();
+		auftragsCSV.append(nummer + "," + titel + "," + name + "," + datum + "," + artikel + "," + arbeitNehmer + ","
+				+ beschreibung);
+		return auftragsCSV.toString();
 	}
 
 	public String getNummer() {
@@ -66,11 +70,11 @@ public class Auftrag {
 		this.name = name;
 	}
 
-	public LocalDate getDatum() {
+	public String getDatum() {
 		return datum;
 	}
 
-	public void setDatum(LocalDate datum) {
+	public void setDatum(String datum) {
 		this.datum = datum;
 	}
 
